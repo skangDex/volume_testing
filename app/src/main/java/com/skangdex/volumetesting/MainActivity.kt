@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 
@@ -76,13 +75,12 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: android.widget.SeekBar?) = Unit
         })
 
-        controller.toggleButton.setOnCheckedChangeListener { buttonView: CompoundButton, isChecked: Boolean ->
+        controller.toggleButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 startLoop(controller.streamType, controller.toneType)
             } else {
                 stopLoop(controller.streamType)
             }
-            buttonView.text = if (isChecked) getString(R.string.stop) else getString(R.string.play)
         }
     }
 
