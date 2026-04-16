@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Volume Testing</string>
+    <string name="app_title">volume testing</string>
+    <string name="speaker_icon">Speaker icon</string>
+    <string name="auto_play_label">Auto-play sample sound when volume changes</string>
+    <string name="media">Media</string>
+    <string name="ring">Ring</string>
+    <string name="alarm">Alarm</string>
+    <string name="notification">Notification</string>
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+</resources>

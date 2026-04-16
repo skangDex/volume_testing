@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/speakerIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/speaker_icon"
+        android:src="@android:drawable/ic_lock_silent_mode_off" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <CheckBox
+        android:id="@+id/autoPlayCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/auto_play_label" />
+
+    <LinearLayout
+        android:id="@+id/barsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
+
+            <com.skangdex.volumetesting.VerticalSeekBar
+                android:id="@+id/mediaSeekBar"
+                android:layout_width="48dp"
+                android:layout_height="220dp"
+                android:max="15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/media" />
+
+            <ToggleButton
+                android:id="@+id/mediaToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textOff="@string/play"
+                android:textOn="@string/stop" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
+
+            <com.skangdex.volumetesting.VerticalSeekBar
+                android:id="@+id/ringSeekBar"
+                android:layout_width="48dp"
+                android:layout_height="220dp"
+                android:max="7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/ring" />
+
+            <ToggleButton
+                android:id="@+id/ringToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textOff="@string/play"
+                android:textOn="@string/stop" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
+
+            <com.skangdex.volumetesting.VerticalSeekBar
+                android:id="@+id/alarmSeekBar"
+                android:layout_width="48dp"
+                android:layout_height="220dp"
+                android:max="7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/alarm" />
+
+            <ToggleButton
+                android:id="@+id/alarmToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textOff="@string/play"
+                android:textOn="@string/stop" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
+
+            <com.skangdex.volumetesting.VerticalSeekBar
+                android:id="@+id/notificationSeekBar"
+                android:layout_width="48dp"
+                android:layout_height="220dp"
+                android:max="7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/notification" />
+
+            <ToggleButton
+                android:id="@+id/notificationToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textOff="@string/play"
+                android:textOn="@string/stop" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

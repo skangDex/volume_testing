@@ -1,2 +1,3 @@
 # volume_testing
-test volume settings by using android app
+
+Android app for testing and adjusting media, ring, alarm, and notification volumes.
