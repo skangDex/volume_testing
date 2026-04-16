@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D3D3D3"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="16dp">
@@ -11,7 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="@string/speaker_icon"
+        android:contentDescription="Speaker icon"
         android:src="@android:drawable/ic_lock_silent_mode_off" />
 
     <TextView
@@ -19,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/app_title"
+        android:text="volume testing"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <CheckBox
@@ -27,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/auto_play_label" />
+        android:text="Auto-play sample sound when volume changes" />
 
     <LinearLayout
         android:id="@+id/barsContainer"
@@ -48,23 +49,25 @@
 
             <com.skangdex.volumetesting.VerticalSeekBar
                 android:id="@+id/mediaSeekBar"
-                android:layout_width="48dp"
-                android:layout_height="220dp"
-                android:max="15" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/media" />
+                android:text="Media" />
 
             <ToggleButton
                 android:id="@+id/mediaToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textOff="@string/play"
-                android:textOn="@string/stop" />
+                android:textOff="PLAY"
+                android:textOn="STOP" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,23 +79,25 @@
 
             <com.skangdex.volumetesting.VerticalSeekBar
                 android:id="@+id/ringSeekBar"
-                android:layout_width="48dp"
-                android:layout_height="220dp"
-                android:max="7" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/ring" />
+                android:text="Ring" />
 
             <ToggleButton
                 android:id="@+id/ringToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textOff="@string/play"
-                android:textOn="@string/stop" />
+                android:textOff="PLAY"
+                android:textOn="STOP" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,23 +109,25 @@
 
             <com.skangdex.volumetesting.VerticalSeekBar
                 android:id="@+id/alarmSeekBar"
-                android:layout_width="48dp"
-                android:layout_height="220dp"
-                android:max="7" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/alarm" />
+                android:text="Alarm" />
 
             <ToggleButton
                 android:id="@+id/alarmToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textOff="@string/play"
-                android:textOn="@string/stop" />
+                android:textOff="PLAY"
+                android:textOn="STOP" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,23 +139,25 @@
 
             <com.skangdex.volumetesting.VerticalSeekBar
                 android:id="@+id/notificationSeekBar"
-                android:layout_width="48dp"
-                android:layout_height="220dp"
-                android:max="7" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/notification" />
+                android:text="Notification" />
 
             <ToggleButton
                 android:id="@+id/notificationToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textOff="@string/play"
-                android:textOn="@string/stop" />
+                android:textOff="PLAY"
+                android:textOn="STOP" />
         </LinearLayout>
     </LinearLayout>
 

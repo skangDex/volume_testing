@@ -1,17 +1,24 @@
 package com.skangdex.volumetesting
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
 import android.media.AudioManager
 import android.media.ToneGenerator
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.widget.CheckBox
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var audioManager: AudioManager
+    private lateinit var notificationManager: NotificationManager
     private lateinit var autoPlayCheckbox: CheckBox
 
     private val handler = Handler(Looper.getMainLooper())
@@ -23,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         audioManager = getSystemService(AudioManager::class.java)
+        notificationManager = getSystemService(NotificationManager::class.java)
         autoPlayCheckbox = findViewById(R.id.autoPlayCheckbox)
+
+        checkNotificationPolicyAccess()
 
         val controllers = listOf(
             StreamController(
@@ -58,13 +68,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeController(controller: StreamController) {
-        controller.seekBar.max = audioManager.getStreamMaxVolume(controller.streamType)
-        controller.seekBar.progress = audioManager.getStreamVolume(controller.streamType)
+        val maxSystemVolume = audioManager.getStreamMaxVolume(controller.streamType)
+        
+        // Use 0-100 for a smooth UI experience
+        controller.seekBar.max = 100
+        
+        // Map current system volume to 0-100 scale
+        val currentVolume = audioManager.getStreamVolume(controller.streamType)
+        controller.seekBar.progress = (currentVolume * 100) / maxSystemVolume
 
         controller.seekBar.setOnSeekBarChangeListener(object : android.widget.SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: android.widget.SeekBar?, progress: Int, fromUser: Boolean) {
+                android.util.Log.i("VolumeTesting", "onProgressChanged: Stream=${controller.streamType}, progress=$progress, fromUser=$fromUser")
                 if (!fromUser) return
-                audioManager.setStreamVolume(controller.streamType, progress, 0)
+                
+                // Use float math for precise mapping and round to nearest integer
+                val maxVol = maxSystemVolume.toFloat()
+                var targetVolume = Math.round((progress.toFloat() * maxVol) / 100f)
+                
+                // Ensure that if progress is > 0, volume is at least 1 (unless max is 0)
+                if (progress > 0 && targetVolume == 0 && maxSystemVolume > 0) {
+                    targetVolume = 1
+                }
+
+                // Log the change for debugging
+                val logMsg = "Stream: ${controller.streamType}, Progress: $progress, Target: $targetVolume / $maxSystemVolume, fromUser: $fromUser"
+                android.util.Log.i("VolumeTesting", logMsg)
+                
+                // Set system volume with UI feedback and play system sound feedback
+                try {
+                    audioManager.setStreamVolume(
+                        controller.streamType, 
+                        targetVolume,
+                        AudioManager.FLAG_SHOW_UI or AudioManager.FLAG_PLAY_SOUND or AudioManager.FLAG_ALLOW_RINGER_MODES
+                    )
+                } catch (e: Exception) {
+                    android.util.Log.e("VolumeTesting", "Error setting volume", e)
+                }
+
                 if (autoPlayCheckbox.isChecked) {
                     playSample(controller.streamType, controller.toneType)
                 }
@@ -104,6 +145,14 @@ class MainActivity : AppCompatActivity() {
     private fun stopLoop(streamType: Int) {
         loopRunnables.remove(streamType)?.let { handler.removeCallbacks(it) }
         toneGenerators[streamType]?.stopTone()
+    }
+
+    private fun checkNotificationPolicyAccess() {
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(this, "Please grant DND access to change Ring/Notification volume", Toast.LENGTH_LONG).show()
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {
