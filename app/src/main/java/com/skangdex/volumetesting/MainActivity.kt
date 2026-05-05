@@ -1,24 +1,20 @@
 package com.skangdex.volumetesting
 
-import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.media.AudioManager
 import android.media.ToneGenerator
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.widget.CheckBox
-import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var audioManager: AudioManager
-    private lateinit var notificationManager: NotificationManager
+
     private lateinit var autoPlayCheckbox: CheckBox
 
     private val handler = Handler(Looper.getMainLooper())
@@ -30,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         audioManager = getSystemService(AudioManager::class.java)
-        notificationManager = getSystemService(NotificationManager::class.java)
+
         autoPlayCheckbox = findViewById(R.id.autoPlayCheckbox)
 
-        checkNotificationPolicyAccess()
+        // checkNotificationPolicyAccess()
 
         val controllers = listOf(
             StreamController(
@@ -145,14 +141,6 @@ class MainActivity : AppCompatActivity() {
     private fun stopLoop(streamType: Int) {
         loopRunnables.remove(streamType)?.let { handler.removeCallbacks(it) }
         toneGenerators[streamType]?.stopTone()
-    }
-
-    private fun checkNotificationPolicyAccess() {
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            Toast.makeText(this, "Please grant DND access to change Ring/Notification volume", Toast.LENGTH_LONG).show()
-            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            startActivity(intent)
-        }
     }
 
     override fun onDestroy() {
