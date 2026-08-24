@@ -1,0 +1,13 @@
+Instructions to AI:
+
+Write me an android application that sets volumes of different types of sounds.
+It should meets the following requirements.
+*  One page application.
+*  On top of the page, show an speaker icon.
+*  Below the speaker icon, show title of the app: volume testing
+*  show a check box to indicate if a sample sound will be automatically played when the volume bar value changes. Together with the intent of the checkbox.
+*  show 4 vertical status bars. They are for media, ring, alarm and notifications respectively.
+*  Show the corresponding name below each bar.
+*  The bar should indicate the volume level of each type of sounds.
+*  The user should be able to touch and slide along the bar to set volume level for each sound type. A sample sound will be played according if the checkbox is checked above.
+*  add a toggle button below each sound bar to play and stop the corresponding sound.
